@@ -1,9 +1,13 @@
-$color-apprentice: #dd0093;
-$color-guru: #882d9e;
-$color-master: #294ddb;
-$color-enlightened: #0093dd;
-$color-burned: #434343;
+$colors-srs: (
+	apprentice: #dd0093,
+	guru: #882d9e,
+	master: #294ddb,
+	enlightened: #0093dd,
+	burned: #434343
+);
 
-$color-radical: #00a1f1;
-$color-kanji: #f100a1;
-$color-vocabulary: #a100f1;
+$colors-type: (
+	radicals: #00a1f1,
+	kanji: #f100a1,
+	vocabulary: #a100f1
+);

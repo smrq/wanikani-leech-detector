@@ -8,7 +8,7 @@ export default function Loading(props) {
 		<section className="section is-medium">
 			<div className="container has-text-centered">
 				<nav className="level">
-					<div className={cx("level-item", styles.loadingKanji)}>
+					<div className={cx("level-item", styles.loading, styles.kanji)}>
 						<div>
 							<p className={styles.heading}>Kanji</p>
 							<p className={cx("title", kanji && styles.pulse)}>{kanji ? 'Loading' : 'Done'}</p>
@@ -19,7 +19,7 @@ export default function Loading(props) {
 							<div className={styles.spinner} />
 						</div>
 					</div>
-					<div className={cx("level-item", styles.loadingVocabulary)}>
+					<div className={cx("level-item", styles.loading, styles.vocabulary)}>
 						<div>
 							<p className={styles.heading}>Vocabulary</p>
 							<p className={cx("title", vocabulary && styles.pulse)}>{vocabulary ? 'Loading' : 'Done'}</p>

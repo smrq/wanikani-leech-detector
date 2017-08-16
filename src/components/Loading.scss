@@ -21,12 +21,12 @@ $color-cycle-time: 1.25s;
 		color-cycle ($color-cycle-time * 4) infinite cubic-bezier(1, 0, 0, 1) ($color-cycle-time * -0.25);
 }
 
-.loadingKanji .heading {
-	color: $color-kanji;
-}
-
-.loadingVocabulary .heading {
-	color: $color-vocabulary;
+.loading {
+	@each $name, $color in $colors-type {
+		&.#{$name} {
+			color: $color;
+		}
+	}
 }
 
 .pulse {
@@ -46,23 +46,23 @@ $color-cycle-time: 1.25s;
 
 @keyframes color-cycle {
 	0%, 100% {
-		border-color: rgba($color-apprentice, 0.2);
-		border-top-color: $color-apprentice;
+		border-color: rgba(map-get($colors-srs, apprentice), 0.2);
+		border-top-color: map-get($colors-srs, apprentice);
 	}
 
 	25% {
-		border-color: rgba($color-guru, 0.2);
-		border-top-color: $color-guru;
+		border-color: rgba(map-get($colors-srs, guru), 0.2);
+		border-top-color: map-get($colors-srs, guru);
 	}
 
 	50% {
-		border-color: rgba($color-master, 0.2);
-		border-top-color: $color-master;
+		border-color: rgba(map-get($colors-srs, master), 0.2);
+		border-top-color: map-get($colors-srs, master);
 	}
 
 	75% {
-		border-color: rgba($color-enlightened, 0.2);
-		border-top-color: $color-enlightened;
+		border-color: rgba(map-get($colors-srs, enlightened), 0.2);
+		border-top-color: map-get($colors-srs, enlightened);
 	}
 }
 

@@ -21,39 +21,17 @@
 		transition: color 100ms linear, text-shadow 100ms linear;
 	}
 
-	&.radicals {
-		background-color: $color-radical;
+	@each $name, $color in $colors-type {
+		&.#{$name} {
+			background-color: $color;
 
-		&:hover {
-			background-color: lighten($color-radical, 10%);
-		}
+			&:hover {
+				background-color: lighten($color, 10%);
+			}
 
-		a:hover {
-			color: darken($color-radical, 20%);
-		}
-	}
-
-	&.kanji {
-		background-color: $color-kanji;
-
-		&:hover {
-			background-color: lighten($color-kanji, 10%);
-		}
-
-		a:hover {
-			color: darken($color-kanji, 20%);
-		}
-	}
-
-	&.vocabulary {
-		background-color: $color-vocabulary;
-
-		&:hover {
-			background-color: lighten($color-vocabulary, 10%);
-		}
-
-		a:hover {
-			color: darken($color-vocabulary, 20%);
+			a:hover {
+				color: darken($color, 20%);
+			}
 		}
 	}
 }
@@ -61,23 +39,9 @@
 .srs {
 	color: #fff;
 
-	&.apprentice {
-		background-color: $color-apprentice;
-	}
-
-	&.guru {
-		background-color: $color-guru;
-	}
-
-	&.master {
-		background-color: $color-master;
-	}
-
-	&.enlightened {
-		background-color: $color-enlightened;
-	}
-
-	&.burned {
-		background-color: $color-burned;
+	@each $name, $color in $colors-srs {
+		&.#{$name} {
+			background-color: $color;
+		}
 	}
 }

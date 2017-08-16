@@ -3,23 +3,9 @@
 .srs {
 	color: #fff;
 
-	&.apprentice {
-		background-color: $color-apprentice;
-	}
-
-	&.guru {
-		background-color: $color-guru;
-	}
-
-	&.master {
-		background-color: $color-master;
-	}
-
-	&.enlightened {
-		background-color: $color-enlightened;
-	}
-
-	&.burned {
-		background-color: $color-burned;
+	@each $name, $color in $colors-srs {
+		&.#{$name} {
+			background-color: $color;
+		}
 	}
 }
