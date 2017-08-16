@@ -1,0 +1,60 @@
+@import '../variables';
+
+.sortColumn {
+	cursor: pointer;
+
+	&:hover {
+		background-color: #fafafa;
+	}
+}
+
+.item {
+	font-size: 24px;
+
+	&.vocabulary {
+		background-color: $color-vocabulary;
+
+		&:hover {
+			background-color: lighten($color-vocabulary, 10%);
+		}
+	}
+
+	&.kanji {
+		background-color: $color-kanji;
+
+		&:hover {
+			background-color: lighten($color-kanji, 10%);
+		}
+	}
+
+	a {
+		color: white;
+		display: block;
+		margin: -0.5rem -0.75rem;
+		padding: 0.5rem 0.75rem;
+	}
+}
+
+.srs {
+	color: #fff;
+
+	&.apprentice {
+		background-color: $color-apprentice;
+	}
+
+	&.guru {
+		background-color: $color-guru;
+	}
+
+	&.master {
+		background-color: $color-master;
+	}
+
+	&.enlightened {
+		background-color: $color-enlightened;
+	}
+
+	&.burned {
+		background-color: $color-burned;
+	}
+}

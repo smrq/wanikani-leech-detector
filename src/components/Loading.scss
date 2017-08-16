@@ -1,0 +1,78 @@
+@import '../variables';
+
+$spin-time: 1.25s;
+$color-cycle-time: 1.25s;
+
+.spinnerWrapper {
+	display: inline-block;
+	font-size: 80px;
+	width: 1em;
+	height: 1em;
+	animation: spin-double ($color-cycle-time * 2) infinite ease;
+}
+
+.spinner {
+	border-radius: 50%;
+	width: 100%;
+	height: 100%;
+	border-width: 0.15em;
+	border-style: solid;
+	animation: spin $spin-time infinite linear,
+		color-cycle ($color-cycle-time * 4) infinite cubic-bezier(1, 0, 0, 1) ($color-cycle-time * -0.25);
+}
+
+.loadingKanji .heading {
+	color: $color-kanji;
+}
+
+.loadingVocabulary .heading {
+	color: $color-vocabulary;
+}
+
+.pulse {
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotateZ(0deg); }
+	100% { transform: rotateZ(360deg); }
+}
+
+@keyframes spin-double {
+	0% { transform: rotateZ(0deg); }
+	50% { transform: rotateZ(180deg); }
+	100% { transform: rotateZ(360deg); }
+}
+
+@keyframes color-cycle {
+	0%, 100% {
+		border-color: rgba($color-apprentice, 0.2);
+		border-top-color: $color-apprentice;
+	}
+
+	25% {
+		border-color: rgba($color-guru, 0.2);
+		border-top-color: $color-guru;
+	}
+
+	50% {
+		border-color: rgba($color-master, 0.2);
+		border-top-color: $color-master;
+	}
+
+	75% {
+		border-color: rgba($color-enlightened, 0.2);
+		border-top-color: $color-enlightened;
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+		text-shadow: 0 0 0 rgba(black, 0.2);
+	}
+  50% {
+    opacity: 0.6;
+		text-shadow: 0 0 1px rgba(black, 0.8);
+  }
+}

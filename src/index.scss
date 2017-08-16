@@ -1,0 +1,16 @@
+@import 'variables';
+
+:global(.table) {
+	tr:hover {
+		background-color: transparent;
+	}
+
+	th, td {
+		text-align: center;
+	}
+
+	td {
+		vertical-align: middle;
+		padding: 0.5rem 0.75rem;
+	}
+}
