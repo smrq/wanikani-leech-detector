@@ -1,15 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './components/App';
+import configureStore from './store/configureStore';
+import { retrieveLocalData } from './localStorage';
 import 'bulma';
 import './index.scss';
-
-import App from './components/App';
-import { retrieveLocalData } from './localStorage';
 
 const apiKey = retrieveLocalData('wanikani_leech_apikey');
 const kanji = retrieveLocalData('wanikani_leech_kanji');
 const vocabulary = retrieveLocalData('wanikani_leech_vocabulary');
 
-ReactDOM.render(
-	<App apiKey={apiKey} kanji={kanji} vocabulary={vocabulary} />,
-	document.getElementById('app'));
+const store = configureStore({ apiKey, kanji, vocabulary });
+
+ReactDOM.render((
+	<Provider store={store}>
+		<App />
+	</Provider>
+), document.getElementById('app'));

@@ -5,7 +5,6 @@ export default function scoreData(itemType, data) {
 		.forEach(item => {
 			const name = item.character;
 			const details = item.user_specific;
-
 			result.push({
 				itemType,
 				name,

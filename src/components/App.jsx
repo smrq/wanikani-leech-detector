@@ -1,25 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ApiEntry from './ApiEntry';
 import Loading from './Loading';
 import Main from './Main';
 import Header from './Header';
 import Footer from './Footer';
-import fetchResource from '../fetchResource';
-import { storeLocalData, clearLocalData } from '../localStorage';
-import scoreData from '../scoreData';
+import * as actions from '../actions';
 
-export default class App extends React.PureComponent {
-	constructor(props) {
-		super(props);
-		this.state = {
-			apiKey: props.apiKey,
-			kanji: props.kanji,
-			vocabulary: props.vocabulary
-		};
-	}
-
+class App extends React.PureComponent {
 	render() {
-		const { kanji, vocabulary, apiKey } = this.state;
+		const { kanji, vocabulary, apiKey } = this.props;
 		return (
 			<div>
 				<Header apiKey={apiKey} onRefresh={this.handleRefresh} onSignOut={this.handleSignOut} />
@@ -36,47 +26,27 @@ export default class App extends React.PureComponent {
 	}
 
 	componentDidMount() {
-		if (this.state.apiKey && !(this.state.kanji && this.state.vocabulary)) {
-			this.loadData();
+		if (this.props.apiKey && !(this.props.kanji && this.props.vocabulary)) {
+			this.props.dispatch(actions.loadData());
 		}
 	}
 
 	handleApiEntry = (apiKey) => {
-		storeLocalData('wanikani_leech_apikey', apiKey);
-		this.setState({ apiKey }, this.loadData);
-	};
-
-	loadData = () => {
-		const { apiKey } = this.state;
-		fetchResource(apiKey, 'vocabulary', data => {
-			const vocabulary = scoreData('vocabulary', data.general);
-			storeLocalData('wanikani_leech_vocabulary', vocabulary, 1000*60*5);
-			this.setState({ vocabulary });
-		});
-		fetchResource(apiKey, 'kanji', data => {
-			const kanji = scoreData('kanji', data);
-			storeLocalData('wanikani_leech_kanji', kanji, 1000*60*5);
-			this.setState({ kanji });
-		});
+		this.props.dispatch(actions.setApiKey(apiKey));
 	};
 
 	handleRefresh = () => {
-		clearLocalData('wanikani_leech_vocabulary');
-		clearLocalData('wanikani_leech_kanji');
-		this.setState({
-			kanji: null,
-			vocabulary: null
-		}, this.loadData);
+		this.props.dispatch(actions.refresh());
 	};
 
 	handleSignOut = () => {
-		clearLocalData('wanikani_leech_vocabulary');
-		clearLocalData('wanikani_leech_kanji');
-		clearLocalData('wanikani_leech_apikey');
-		this.setState({
-			apiKey: null,
-			kanji: null,
-			vocabulary: null
-		});
+		this.props.dispatch(actions.signOut());
 	};
 }
+
+function mapStateToProps(state) {
+	const { apiKey, kanji, vocabulary } = state;
+	return { apiKey, kanji, vocabulary };
+}
+
+export default connect(mapStateToProps)(App);
