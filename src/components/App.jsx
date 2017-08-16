@@ -9,14 +9,14 @@ import * as actions from '../actions';
 
 class App extends React.PureComponent {
 	render() {
-		const { kanji, vocabulary, apiKey } = this.props;
+		const { radicals, kanji, vocabulary, apiKey } = this.props;
 		return (
 			<div>
 				<Header apiKey={apiKey} onRefresh={this.handleRefresh} onSignOut={this.handleSignOut} />
 				<main>
 					{
-						(kanji && vocabulary) ? <Main kanji={kanji} vocabulary={vocabulary} /> :
-						apiKey ? <Loading kanji={kanji == null} vocabulary={vocabulary == null} /> :
+						(radicals && kanji && vocabulary) ? <Main radicals={radicals} kanji={kanji} vocabulary={vocabulary} /> :
+						apiKey ? <Loading radicals={radicals == null} kanji={kanji == null} vocabulary={vocabulary == null} /> :
 						<ApiEntry onEnter={this.handleApiEntry} />
 					}
 				</main>
@@ -26,7 +26,7 @@ class App extends React.PureComponent {
 	}
 
 	componentDidMount() {
-		if (this.props.apiKey && !(this.props.kanji && this.props.vocabulary)) {
+		if (this.props.apiKey && !(this.props.radicals && this.props.kanji && this.props.vocabulary)) {
 			this.props.dispatch(actions.loadData());
 		}
 	}
@@ -45,8 +45,8 @@ class App extends React.PureComponent {
 }
 
 function mapStateToProps(state) {
-	const { apiKey, kanji, vocabulary } = state;
-	return { apiKey, kanji, vocabulary };
+	const { apiKey, radicals, kanji, vocabulary } = state;
+	return { apiKey, radicals, kanji, vocabulary };
 }
 
 export default connect(mapStateToProps)(App);

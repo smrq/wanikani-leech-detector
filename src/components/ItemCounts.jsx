@@ -4,8 +4,9 @@ import sortItems from '../sortItems';
 import { srsLevelName } from '../srs';
 import styles from './ItemCounts.scss';
 
-export default function ItemCounts({ className, kanji, vocabulary }) {
-	const items = [...kanji, ...vocabulary];
+export default function ItemCounts({ className, radicals, kanji, vocabulary }) {
+	const items = [...radicals, ...kanji, ...vocabulary]
+		.filter(item => item.type === 'Meaning');
 	return (
 		<div className={className}>
 			<table className="table">
@@ -14,7 +15,7 @@ export default function ItemCounts({ className, kanji, vocabulary }) {
 						<tr key={n}>
 							<th>{text}</th>
 							<td className={cx(styles.srs, styles[srsLevelName(n+1)])}>
-								{items.filter(item => item.srs === n+1).length / 2}
+								{items.filter(item => item.srs === n+1).length}
 							</td>
 						</tr>
 					))}

@@ -30,20 +30,26 @@ export function signOut() {
 	};
 }
 
-function loadData() {
+export function loadData() {
 	return (dispatch, getState) => {
 		const { apiKey } = getState();
 
-		fetchResource(apiKey, 'vocabulary', data => {
-			const vocabulary = scoreData('vocabulary', data.general);
-			storeLocalData('wanikani_leech_vocabulary', vocabulary, 1000*60*5);
-			dispatch({ type: 'VOCABULARY_LOADED', payload: vocabulary });
+		fetchResource(apiKey, 'radicals', data => {
+			const radicals = scoreData('radicals', data);
+			storeLocalData('wanikani_leech_kanji', radicals, 1000*60*5);
+			dispatch({ type: 'RADICALS_LOADED', payload: radicals });
 		});
 
 		fetchResource(apiKey, 'kanji', data => {
 			const kanji = scoreData('kanji', data);
 			storeLocalData('wanikani_leech_kanji', kanji, 1000*60*5);
 			dispatch({ type: 'KANJI_LOADED', payload: kanji });
+		});
+
+		fetchResource(apiKey, 'vocabulary', data => {
+			const vocabulary = scoreData('vocabulary', data.general);
+			storeLocalData('wanikani_leech_vocabulary', vocabulary, 1000*60*5);
+			dispatch({ type: 'VOCABULARY_LOADED', payload: vocabulary });
 		});
 	};
 }

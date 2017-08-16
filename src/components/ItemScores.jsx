@@ -16,10 +16,10 @@ export default class ItemScores extends React.PureComponent {
 	}
 
 	render() {
-		const { className, kanji, vocabulary } = this.props;
+		const { className, radicals, kanji, vocabulary } = this.props;
 		const { sort, sortDescending, count, includeBurned } = this.state;
 
-		const items = [...kanji, ...vocabulary];
+		const items = [...radicals, ...kanji, ...vocabulary];
 
 		let limitedItems = items;
 		if (!includeBurned) {

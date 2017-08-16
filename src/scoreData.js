@@ -15,16 +15,19 @@ export default function scoreData(itemType, data) {
 				streak: details.meaning_current_streak,
 				score: details.meaning_incorrect / details.meaning_current_streak
 			});
-			result.push({
-				itemType,
-				name,
-				type: 'Reading',
-				srs: details.srs_numeric,
-				burned: details.burned,
-				wrongCount: details.reading_incorrect,
-				streak: details.reading_current_streak,
-				score: details.reading_incorrect / details.reading_current_streak
-			});
+
+			if (details.reading_incorrect !== null) {
+				result.push({
+					itemType,
+					name,
+					type: 'Reading',
+					srs: details.srs_numeric,
+					burned: details.burned,
+					wrongCount: details.reading_incorrect,
+					streak: details.reading_current_streak,
+					score: details.reading_incorrect / details.reading_current_streak
+				});
+			}
 		});
 	return result;
 }

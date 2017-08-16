@@ -10,12 +10,26 @@
 
 .item {
 	font-size: 24px;
+	transition: background-color 100ms linear;
 
-	&.vocabulary {
-		background-color: $color-vocabulary;
+	a {
+		color: white;
+		text-shadow: none;
+		display: block;
+		margin: -0.5rem -0.75rem;
+		padding: 0.5rem 0.75rem;
+		transition: color 100ms linear, text-shadow 100ms linear;
+	}
+
+	&.radicals {
+		background-color: $color-radical;
 
 		&:hover {
-			background-color: lighten($color-vocabulary, 10%);
+			background-color: lighten($color-radical, 10%);
+		}
+
+		a:hover {
+			color: darken($color-radical, 20%);
 		}
 	}
 
@@ -25,13 +39,22 @@
 		&:hover {
 			background-color: lighten($color-kanji, 10%);
 		}
+
+		a:hover {
+			color: darken($color-kanji, 20%);
+		}
 	}
 
-	a {
-		color: white;
-		display: block;
-		margin: -0.5rem -0.75rem;
-		padding: 0.5rem 0.75rem;
+	&.vocabulary {
+		background-color: $color-vocabulary;
+
+		&:hover {
+			background-color: lighten($color-vocabulary, 10%);
+		}
+
+		a:hover {
+			color: darken($color-vocabulary, 20%);
+		}
 	}
 }
 
