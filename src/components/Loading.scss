@@ -3,7 +3,7 @@
 $spin-time: 1.25s;
 $color-cycle-time: 1.25s;
 
-.spinnerWrapper {
+.spinner {
 	display: inline-block;
 	margin: 0.75rem;
 	margin-bottom: 3rem;
@@ -11,16 +11,18 @@ $color-cycle-time: 1.25s;
 	width: 1em;
 	height: 1em;
 	animation: spin-double ($color-cycle-time * 2) infinite ease;
-}
 
-.spinner {
-	border-radius: 50%;
-	width: 100%;
-	height: 100%;
-	border-width: 0.15em;
-	border-style: solid;
-	animation: spin $spin-time infinite linear,
-		color-cycle ($color-cycle-time * 4) infinite cubic-bezier(1, 0, 0, 1) ($color-cycle-time * -0.25);
+	&::before {
+		content: '';
+		display: block;
+		border-radius: 50%;
+		width: 100%;
+		height: 100%;
+		border-width: 0.15em;
+		border-style: solid;
+		animation: spin $spin-time infinite linear,
+			color-cycle ($color-cycle-time * 4) infinite cubic-bezier(1, 0, 0, 1) ($color-cycle-time * -0.25);
+	}
 }
 
 .loading {

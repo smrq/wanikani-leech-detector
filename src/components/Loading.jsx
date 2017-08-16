@@ -7,9 +7,7 @@ export default function Loading(props) {
 	return (
 		<section className="section is-medium">
 			<div className="container has-text-centered">
-				<div className={styles.spinnerWrapper}>
-					<div className={styles.spinner} />
-				</div>
+				<div className={styles.spinner} />
 			</div>
 			<div className="container has-text-centered">
 				<div className="columns">
