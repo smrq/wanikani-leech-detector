@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import sortItems from '../sortItems';
 import { srsLevelName } from '../srs';
+import { scoredItemsSelector } from '../selectors';
 import styles from './ItemScores.scss';
 
-export default class ItemScores extends React.PureComponent {
+class ItemScores extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -16,12 +18,10 @@ export default class ItemScores extends React.PureComponent {
 	}
 
 	render() {
-		const { className, radicals, kanji, vocabulary } = this.props;
+		const { className, items } = this.props;
 		const { sort, sortDescending, count, includeBurned } = this.state;
 
-		const items = [...radicals, ...kanji, ...vocabulary];
-
-		let limitedItems = items;
+		let limitedItems = [...items];
 		if (!includeBurned) {
 			limitedItems = limitedItems.filter(item => !item.burned);
 		}
@@ -104,3 +104,11 @@ export default class ItemScores extends React.PureComponent {
 		this.setState(state => ({ includeBurned: !state.includeBurned }));
 	};
 }
+
+function mapStateToProps(state) {
+	return {
+		items: scoredItemsSelector(state)
+	};
+}
+
+export default connect(mapStateToProps)(ItemScores);

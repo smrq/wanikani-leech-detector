@@ -1,12 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import sortItems from '../sortItems';
+import { srsCountSelector } from '../selectors';
 import { srsLevelName } from '../srs';
 import styles from './ItemCounts.scss';
 
-export default function ItemCounts({ className, radicals, kanji, vocabulary }) {
-	const items = [...radicals, ...kanji, ...vocabulary]
-		.filter(item => item.type === 'Meaning');
+function ItemCounts({ className, srsCount }) {
 	return (
 		<div className={className}>
 			<table className="table">
@@ -15,7 +15,7 @@ export default function ItemCounts({ className, radicals, kanji, vocabulary }) {
 						<tr key={n}>
 							<th>{text}</th>
 							<td className={cx(styles.srs, styles[srsLevelName(n+1)])}>
-								{items.filter(item => item.srs === n+1).length}
+								{srsCount[n]}
 							</td>
 						</tr>
 					))}
@@ -24,3 +24,11 @@ export default function ItemCounts({ className, radicals, kanji, vocabulary }) {
 		</div>
 	);
 }
+
+function mapStateToProps(state) {
+	return {
+		srsCount: srsCountSelector(state)
+	};
+}
+
+export default connect(mapStateToProps)(ItemCounts);
