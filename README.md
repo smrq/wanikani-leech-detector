@@ -1,5 +1,5 @@
 # Usage
 
-  npm install
-  npm start
-  open dist/index.html
+    npm install
+    npm start
+    open dist/index.html
